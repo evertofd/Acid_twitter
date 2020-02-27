@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="col-12">
+    <div class="row">
+      <h1 class="text-center text-secondary">Bienvenidos</h1>
+    </div>
+  </div>
+  <div class="row tweets-container">
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    function executeQuery() {
+      $.get('/get_tweet',
+      function (data) {
+        $( ".tweets-container" ).empty();
+        data.forEach((item, i) => {
+          const tweet = '<div class="card col-12 col-sm-4 px-sm-4 tweet-card">' +
+            '<div class="card-body">' +
+              '<h5 class="card-title">#CHILEDESPERTO</h5>' +
+              '<p class="card-text">' +
+                data[i]['text']
+                '</p>' +
+                '</div>' +
+                '</div>';
+                $( ".tweets-container" ).append(tweet);
+              });
+            });
+
+            setTimeout(executeQuery, 5000); // you could choose not to continue on failure...
+          }
+
+          executeQuery();
+        });
+      </script>
